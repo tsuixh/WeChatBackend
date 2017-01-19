@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>微信公众平台</title>
+    <meta charset="UTF-8">
+    <title>登陆到微信公众平台</title>
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
 </head>
-<body>
+<body background="img/bg.jpg">
+<div class="container">
+    <!--导航栏-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="微信公众号后台" src="img/wechat.png" style="margin-top: -5px">
+                </a>
+            </div>
+            <p class="navbar-text">登陆到微信公众平台</p>
+        </div>
+    </nav><!--导航栏-->
+
+    <!--表单区域-->
+    <div class="jumbotron">
+        <div class="container">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="account" class="form-control" id="inputEmail3" placeholder="请输入账号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 记住我
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-info">登陆</button>
+                    </div>
+                </div>
+            </form>
+        </div><!--表单区域-->
+    </div>
+    <!--版权信息-->
+    <hr>
+    <div class="well text-info">Powered by Yunhong</div>
+
+</div>
 
 </body>
 </html>
