@@ -14,7 +14,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class DatabaseUtil {
 	
 	private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://127.0.0.1:3306/wechat_backend";
+	private static final String URL = "jdbc:mysql://127.0.0.1:3306/wechat_backend?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "123456";
 	private static final int POOL_SIZE = 15;

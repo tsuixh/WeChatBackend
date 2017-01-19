@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆到微信公众平台</title>
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+</head>
+<body background="img/bg.jpg">
+    <div class="container">
+        <!--导航栏-->
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img alt="微信公众号后台" src="img/wechat.png" style="margin-top: -5px">
+                    </a>
+                </div>
+                <p class="navbar-text">登陆到微信公众平台</p>
+            </div>
+        </nav><!--导航栏-->
+
+        <div class="jumbotron">
+            <div class="container">
+                <h2 id="hint" class="text-warning">账号或密码错误，3秒后返回登陆页面</h2>
+            </div>
+        </div>
+        
+        <!--版权信息-->
+    <hr>
+    <div class="well text-info">Powered by Yunhong</div>
+    </div>
+
+    <script>
+        var h1 = document.getElementById("hint");
+        var timeRange = 3;
+        setInterval(function () {
+            h1.innerText = "账号或密码错误，" + --timeRange + "秒后返回登陆页面"
+            if (timeRange < 1) {
+                location.href="index.html";
+            }
+        }, 1000);
+
+    </script>
+</body>
+</html>

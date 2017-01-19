@@ -28,7 +28,7 @@ public class DaoHelper {
 		Keyword keyword = null;
 		conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT reply_type,article_id,text_id FROM KEYWORD WHERE KEYWORD = ?");
-		ps.setString(0, key);
+		ps.setString(1, key);
 		ResultSet rs = ps.executeQuery();
 		if (rs != null) {
 			String reply_type = rs.getString("reply_type");
@@ -57,7 +57,7 @@ public class DaoHelper {
 		Article article = null;
 		conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,ad_url FROM article WHERE article_id = ?");
-		ps.setInt(0, article_id);
+		ps.setInt(1, article_id);
 		ResultSet rs = ps.executeQuery();
 		if (rs != null) {
 			String title = rs.getString("title");
@@ -126,5 +126,27 @@ public class DaoHelper {
 			}
 		}
 		return articles;
+	}
+	
+	/**
+	 * ≤È—Ø’À∫≈√‹¬Î
+	 * @param account
+	 * @param password
+	 * @return	◊¥Ã¨¬Î	µ«¬Ω≥…π¶£∫1£ª’À∫≈≤ª¥Ê‘⁄ªÚ√‹¬Î¥ÌŒÛ£∫0£ª
+	 * @throws SQLException 
+	 */
+	public static int qureyAdminister(String account, String password) throws SQLException {
+		int stateCode = 0;
+		conn = DatabaseUtil.getConn();
+		PreparedStatement ps = conn.prepareStatement("SELECT id FROM admin WHERE account = ? AND password = ?");
+		ps.setString(1, account);
+		ps.setString(2, password);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			stateCode = 1;
+		} else {
+			stateCode = 0;
+		}
+		return stateCode;
 	}
 }
