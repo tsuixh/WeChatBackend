@@ -16,7 +16,6 @@
 </head>
 <body>
 
-<div class="container">
 	<!--  导航栏 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
     	<div class="container">
@@ -29,8 +28,8 @@
     				<li><a href="#">设置默认回复</a>
     				<li><a href="#">查看统计数据</a></li>
     			</ul>
-    		</div>
     		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">${user }</a></p>
+    		</div>
     	</div>
     </nav>
     
@@ -85,6 +84,5 @@
 	    <hr>
 	    <div class="text-info">&copy;武理解析Wulijiexi. Powered by Yunhong. 2017</div>
     </div>
-   </div>
 </body>
 </html>
