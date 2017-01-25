@@ -3,8 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <title>微信公众号管理中心</title>
+<link href="css/lib/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+	<div class="container">
+		<!--  导航栏 -->
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	    	<div class="container">
+	    		<a class="navbar-brand" href="#">武理解析-Wulijiexi</a>
+	    		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
+	    			<ul class="nav navbar-nav na">
+	    				<li><a href="#">关键词管理</a></li>
+	    				<li class="active"><a href="#">添加图文回复</a></li>
+	    				<li><a href="#">添加文字回复</a></li>
+	    				<li><a href="#">设置默认回复</a>
+	    				<li><a href="#">查看统计数据</a></li>
+	    			</ul>
+	    		</div>
+	    	</div>
+	    </nav>
+	    
+	    <div class="well" id="form_area">
+	    	<form>
+			  <div class="form-group">
+			    <label for="title">图文标题</label>
+			    <input type="text" class="form-control" id="title" placeholder="图文标题">
+			  </div>
+			  <div class="form-group">
+			    <label for="description">图文描述</label>
+			    <input type="text" class="form-control" id="description" placeholder="图文描述">
+			  </div>
+			  <div class="form-group">
+			    <label for="pic_url">封面图片地址</label>
+			    <input type="url" class="form-control" id="pic_url" placeholder="例如：http://www.baidu.com/img/hello.jpg">
+			  </div>
+			  <div class="form-group">
+			    <label for="url">文章地址</label>
+			    <input type="url" class="form-control" id="url" placeholder="例如：http://www.baidu.com/article/wulijiexi.html">
+			  </div>
+			  <div class="form-group">
+			    <label for="keyword">关键词</label>
+			    <input type="text" class="form-control" id="keyword" placeholder="请填写关键词">
+			  </div>
+			  <button type="submit" class="btn btn-info">提交</button>
+			</form>
+	    </div>
+	</div>
 </body>
 </html>

@@ -21,7 +21,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
     	<div class="container">
     		<a class="navbar-brand" href="#">武理解析-Wulijiexi</a>
-    		<div calss="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
+    		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
     			<ul class="nav navbar-nav na">
     				<li><a href="#">关键词管理</a></li>
     				<li><a href="#">添加图文回复</a></li>

@@ -29,17 +29,6 @@ public class WechatProcess {
 			result = new RobotProcess().processEvent(xmlEntity.getEvent(), xmlEntity.getFromUserName(), xmlEntity.getToUserName());
 		}
 		
-		
-		
-		
-		/*
-		 * 获取到自动回复后，将消息包装成xml格式<br>
-		 * 当前只能回复文字消息 
-		 */
-		//result = new FormatXmlProcess().formatTextAnswer(xmlEntity.getFromUserName(), xmlEntity.getToUserName(), result);
-		
-		
-		
 		return result;
 	}
 }
