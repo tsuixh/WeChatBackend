@@ -84,7 +84,7 @@ public class DaoHelper {
 			conn = DatabaseUtil.getConn();
 		}
 		Statement s = conn.createStatement();
-		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM ad WHERE is_active = 1");
+		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM ad order by ad_id desc limit 1");
 		
 		String title = rs.getString("title");
 		String description = rs.getString("description");
