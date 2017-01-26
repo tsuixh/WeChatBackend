@@ -26,7 +26,9 @@ public class DaoHelper {
 	 */
 	public static Keyword queryByKeyword(String key) throws SQLException {
 		Keyword keyword = null;
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		PreparedStatement ps = conn.prepareStatement("SELECT reply_type,article_id,text_id FROM KEYWORD WHERE KEYWORD = ?");
 		ps.setString(1, key);
 		ResultSet rs = ps.executeQuery();
@@ -55,7 +57,9 @@ public class DaoHelper {
 	 */
 	public static Article queryArticleById(int article_id) throws SQLException {
 		Article article = null;
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,ad_url FROM article WHERE article_id = ?");
 		ps.setInt(1, article_id);
 		ResultSet rs = ps.executeQuery();
@@ -76,7 +80,9 @@ public class DaoHelper {
 	 */
 	public static Article queryCurrentAdvertisement() throws SQLException {
 		Article article = null;
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM ad WHERE is_active = 1");
 		
@@ -98,7 +104,9 @@ public class DaoHelper {
 	 */
 	public static String queryTextReplyById(int id) throws SQLException {
 		String reply_text = "";
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT content FROM text_reply WHERE text_id = " + String.valueOf(id));
 		reply_text = rs.getString("content");
@@ -112,7 +120,9 @@ public class DaoHelper {
 	 */
 	public static ArrayList<Article> queryArticles4Subscrible() throws SQLException {
 		ArrayList<Article> articles = new ArrayList<>();
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM article WHERE is4_sub = 1");
 		if (rs != null) {
@@ -137,7 +147,9 @@ public class DaoHelper {
 	 */
 	public static int qureyAdminister(String account, String password) throws SQLException {
 		int stateCode = 0;
-		conn = DatabaseUtil.getConn();
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
 		PreparedStatement ps = conn.prepareStatement("SELECT id FROM admin WHERE account = ? AND password = ?");
 		ps.setString(1, account);
 		ps.setString(2, password);
@@ -149,4 +161,81 @@ public class DaoHelper {
 		}
 		return stateCode;
 	}
+	
+	/**
+	 * 添加文章并返回文章自增长id
+	 * @param article		文章对象
+	 * @return				添加文章后的自增长id
+	 * @throws SQLException 
+	 */
+	public static int addArticle(Article article) throws SQLException {
+		int auto_incrementID = 0;
+		//获取连接
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		PreparedStatement ps = conn.prepareStatement("insert into article (title,description,pic_url,url,is4_sub) values (?,?,?,?,?)");
+		ps.setString(1, article.getTitle());
+		ps.setString(2, article.getDescription());
+		ps.setString(3, article.getPicUrl());
+		ps.setString(4, article.getUrl());
+		ps.setInt(5, 0);
+		//获取插入是否成功
+		int effectedRow = ps.executeUpdate();
+		if (effectedRow > 0) {
+			//查询自增长id
+			ps = conn.prepareStatement("select LAST_INSERT_ID()");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				auto_incrementID = rs.getInt(1);
+			}
+		}
+		return auto_incrementID;
+	}
+
+	/**
+	 * 添加关键词，根据回复类型的不同，来形成对照表
+	 * @param id	回复资源id（articleID|textID）
+	 * @param tempKeywords	关键词数组
+	 * @param replyType	（"article"|"text"）回复类型
+	 * @return	添加成功与否
+	 * @throws SQLException 
+	 */
+	public static boolean addKeywords(int id, String[] tempKeywords, String replyType) throws SQLException {
+		boolean isSuccess = false;
+		//获取连接
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		PreparedStatement ps = null;
+		int effectedRows = 0;
+		//根据回复类型的不同做不同处理
+		if ("article".equals(replyType)) {
+			//回复类型为文章
+			ps = conn.prepareStatement("insert into keyword (keyword,reply_type,article_id) values (?,?,?)");
+			for (int i = 0; i < tempKeywords.length; ++i) {
+				ps.setString(1, tempKeywords[i]);
+				ps.setString(2, replyType);
+				ps.setInt(3, id);
+				effectedRows += ps.executeUpdate();
+			}
+		} else if ("text".equals(replyType)) {
+			//回复类型为文字
+			ps = conn.prepareStatement("insert into keyword (keyword,reply_type,text_id) values (?,?,?)");
+			for (int i = 0; i < tempKeywords.length; ++i) {
+				ps.setString(1, tempKeywords[i]);
+				ps.setString(2, replyType);
+				ps.setInt(3, id);
+				effectedRows += ps.executeUpdate();
+			}
+		}
+		
+		//判断是否都添加成功
+		if (effectedRows == tempKeywords.length) {
+			isSuccess = true;
+		}
+		return isSuccess;
+	}
+	
+	
 }

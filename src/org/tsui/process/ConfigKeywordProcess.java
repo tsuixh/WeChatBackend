@@ -1,6 +1,9 @@
 package org.tsui.process;
 
+import java.sql.SQLException;
+
 import org.tsui.entity.Article;
+import org.tsui.util.DaoHelper;
 
 /**
  * @author TsuiXh
@@ -13,10 +16,30 @@ public class ConfigKeywordProcess {
 	 * @param article			图文
 	 * @param keywords	关键字长串
 	 * @return					添加是否成功
+	 * @throws SQLException 
 	 */
-	public static boolean addArticleReplyProcess(Article article, String keywords) {
-		boolean isSucess = false;
+	public boolean addArticleReplyProcess(Article article, String keywords) throws SQLException {
+		boolean isSuccess = false;
+		/*
+		 * 添加图文并将其与关键词形成关联
+		 */
+		//1.处理关键词字符串
+		String[] tempKeywords = processKeywords(keywords);
 		
-		return isSucess;
+		//2.添加文章并获取文章自增长id
+		int articleID = DaoHelper.addArticle(article);
+		//3.根据获得的文章id处理关键词
+		isSuccess = DaoHelper.addKeywords(articleID, tempKeywords, "article");
+		
+		return isSuccess;
+	}
+	
+	/**
+	 * 处理关键词长串
+	 * @param keywords
+	 * @return	关键词数组
+	 */
+	private String[] processKeywords(String keywords) {
+		return keywords.split("，");
 	}
 }

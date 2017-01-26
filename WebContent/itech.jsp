@@ -19,12 +19,13 @@
 	<!--  导航栏 -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
     	<div class="container">
-    		<a class="navbar-brand" href="#">武理解析-Wulijiexi</a>
+    		<a class="navbar-brand" href="itech.jsp">武理解析-Wulijiexi</a>
     		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
     			<ul class="nav navbar-nav na">
-    				<li><a href="#">关键词管理</a></li>
-    				<li><a href="#">添加图文回复</a></li>
-    				<li><a href="#">添加文字回复</a></li>
+    				<li><a href="keyword_manage.jsp">关键词管理</a></li>
+    				<li><a href="addPic_reply.html">添加图文回复</a></li>
+    				<li><a href="addText_reply.html">添加文字回复</a></li>
+    				<li><a href="#">广告设置</a></li>
     				<li><a href="#">设置默认回复</a>
     				<li><a href="#">查看统计数据</a></li>
     			</ul>
