@@ -25,8 +25,8 @@
     				<li><a href="keyword_manage.jsp">关键词管理</a></li>
     				<li><a href="addPic_reply.html">添加图文回复</a></li>
     				<li><a href="addText_reply.html">添加文字回复</a></li>
-    				<li><a href="#">广告设置</a></li>
-    				<li><a href="#">设置默认回复</a>
+    				<li><a href="addAd.html">广告设置</a></li>
+    				<li><a href="defaultTextReply.html">设置默认回复</a>
     				<li><a href="#">查看统计数据</a></li>
     			</ul>
     		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">${user }</a></p>
@@ -43,21 +43,29 @@
 		  <ol class="carousel-indicators">
 		    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 		    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
 		  </ol>
 		
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
-		      <img src="img/bg.jpg" alt="...">
+		      <img src="img/scroll_1.jpg" alt="...">
 		      <div class="carousel-caption">
 		        <h3>展示图片1</h3>
 		        <p>关于武理解析的使用方法</p>
 		      </div>
 		    </div>
 		    <div class="item">
-		      <img src="img/left_pic.jpg" alt="...">
+		      <img src="img/scroll_2.jpg" alt="...">
 		      <div class="carousel-caption">
 		        <h3>展示图片2</h3>
+		        <p>关于武理解析的使用方法</p>
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="img/scroll_3.jpg" alt="...">
+		      <div class="carousel-caption">
+		        <h3>展示图片3</h3>
 		        <p>关于武理解析的使用方法</p>
 		      </div>
 		    </div>

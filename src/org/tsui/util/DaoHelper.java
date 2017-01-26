@@ -32,7 +32,7 @@ public class DaoHelper {
 		PreparedStatement ps = conn.prepareStatement("SELECT reply_type,article_id,text_id FROM KEYWORD WHERE KEYWORD = ?");
 		ps.setString(1, key);
 		ResultSet rs = ps.executeQuery();
-		if (rs != null) {
+		if (rs.next()) {
 			String reply_type = rs.getString("reply_type");
 			if ("article".endsWith(reply_type)) {
 				int article_id = rs.getInt("article_id");
@@ -273,7 +273,7 @@ public class DaoHelper {
 			conn = DatabaseUtil.getConn();
 		}
 		
-		PreparedStatement ps = conn.prepareStatement("insert into ad (content) values (?)");
+		PreparedStatement ps = conn.prepareStatement("insert into text_reply (content) values (?)");
 		ps.setString(1, content);
 		int effectedRow = ps.executeUpdate();
 		

@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.tsui.util.DaoHelper;
 import org.tsui.util.EncryptUtil;
@@ -30,13 +31,9 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String flag = request.getParameter("flag");
 		
-		System.out.println(account);
-		System.out.println(password);
-		System.out.println(flag);
 		//查询数据库
 		try {
 			int stateCode = DaoHelper.qureyAdminister(account, password);
-			System.out.println(stateCode);
 			if (stateCode == 1) {
 				//登陆成功
 				//是否记住密码
@@ -46,7 +43,8 @@ public class LoginServlet extends HttpServlet {
 					response.addCookie(cookie);
 				}
 				//页面跳转到管理页面
-				request.setAttribute("user", account);
+				HttpSession session = request.getSession();
+				session.setAttribute("user", account);
 				request.getRequestDispatcher("itech.jsp").forward(request, response);
 			} else {
 				//账号或密码错误
