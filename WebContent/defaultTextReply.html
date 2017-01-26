@@ -15,10 +15,10 @@
 	    		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
 	    			<ul class="nav navbar-nav na">
 	    				<li><a href="#">关键词管理</a></li>
-	    				<li class="active"><a href="#">添加图文回复</a></li>
+	    				<li><a href="addPic_reply.html">添加图文回复</a></li>
 	    				<li><a href="addText_reply.html">添加文字回复</a></li>
 	    				<li><a href="addAd.html">广告设置</a></li>
-	    				<li><a href="defaultTextReply.html">设置默认回复</a>
+	    				<li class="active"><a href="#">设置默认回复</a>
 	    				<li><a href="#">查看统计数据</a></li>
 	    			</ul>
 	    		</div>
@@ -28,26 +28,10 @@
 	    <!-- 表单部分 -->
 	    <div class="well" id="form_area">
 	    	<form action="ConfigServlet" method="post">
-	    	  <input type="hidden" name="reply_type" value="article">
+	    	  <input type="hidden" name="reply_type" value="default">
 			  <div class="form-group">
-			    <label for="title">图文标题</label>
-			    <input type="text" class="form-control" id="title" name="title" placeholder="图文标题">
-			  </div>
-			  <div class="form-group">
-			    <label for="description">图文描述</label>
-			    <input type="text" class="form-control" id="description" name="description" placeholder="图文描述">
-			  </div>
-			  <div class="form-group">
-			    <label for="pic_url">封面图片地址</label>
-			    <input type="url" class="form-control" id="pic_url" name="pic_url" placeholder="例如：http://www.baidu.com/img/hello.jpg">
-			  </div>
-			  <div class="form-group">
-			    <label for="url">文章地址</label>
-			    <input type="url" class="form-control" id="url" name="url" placeholder="例如：http://www.baidu.com/article/wulijiexi.html">
-			  </div>
-			  <div class="form-group">
-			    <label for="keyword">关键词</label>
-			    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="请填写关键词,关键词语关键词之间用逗号分隔">
+			    <label for="content">默认回复文字内容</label>
+			    <input type="text" class="form-control" id="content" name="content" placeholder="当没有对应的关键词对应时，回复默认消息">
 			  </div>
 			  <button type="submit" class="btn btn-info">提交</button>
 			</form>

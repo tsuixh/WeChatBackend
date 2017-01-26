@@ -237,5 +237,78 @@ public class DaoHelper {
 		return isSuccess;
 	}
 	
+	/**
+	 * 添加广告
+	 * @param advertisement	文章对象
+	 * @return	true if success 
+	 * @throws SQLException 
+	 */
+	public static boolean addAdvertisement(Article advertisement) throws SQLException {
+		
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		
+		PreparedStatement ps = conn.prepareStatement("insert into ad (title,description,pic_url,ad_url) values (?,?,?,?)");
+		ps.setString(1, advertisement.getTitle());
+		ps.setString(2, advertisement.getDescription());
+		ps.setString(3, advertisement.getPicUrl());
+		ps.setString(4, advertisement.getUrl());
+		
+		int effectedRow = ps.executeUpdate();
+		
+		return effectedRow > 0? true : false;
+	}
+
+	/**
+	 * 添加文字回复返回自增长id
+	 * @param content	文字消息内容
+	 * @return	自增长id
+	 * @throws SQLException 
+	 */
+	public static int addTextReply(String content) throws SQLException {
+		int auto_incrementID = 0;
+		
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		
+		PreparedStatement ps = conn.prepareStatement("insert into ad (content) values (?)");
+		ps.setString(1, content);
+		int effectedRow = ps.executeUpdate();
+		
+		if (effectedRow > 0) {
+			//查询自增长id
+			ps = conn.prepareStatement("select LAST_INSERT_ID()");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				auto_incrementID = rs.getInt(1);
+			}
+		}
+		
+		return auto_incrementID;
+	}
+
+	/**
+	 * 更新文字回复内容
+	 * @param content	文字回复内容
+	 * @param textID	文字回复对应的id
+	 * @return	true if success
+	 * @throws SQLException 
+	 */
+	public static boolean updateTextReply(String content, int textID) throws SQLException {
+		
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		
+		PreparedStatement ps = conn.prepareStatement("update text_reply set content = ? where text_id = ?");
+		ps.setString(1, content);
+		ps.setInt(2, textID);
+		
+		int effectedRow = ps.executeUpdate();
+		return effectedRow > 0? true : false;
+	}
+	
 	
 }
