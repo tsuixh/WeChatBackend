@@ -414,4 +414,32 @@ public class DaoHelper {
 		 */
 		public List getData(ResultSet rs) throws SQLException;
 	}
+
+	/**
+	 * 通过id删除关键词
+	 * @param key_id
+	 * @throws SQLException
+	 */
+	public static void deleteKeywordById(int key_id) throws SQLException {
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		PreparedStatement ps = conn.prepareStatement("delete from keyword where key_id=?");
+		ps.setInt(1, key_id);
+		ps.executeUpdate();
+	}
+
+	/**
+	 * 根据id设置关注的自动回复
+	 * @param article_id
+	 * @throws SQLException 
+	 */
+	public static void setSubArticle(int article_id) throws SQLException {
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		PreparedStatement ps = conn.prepareStatement("update article set is4_sub = 1 where article_id = ?");
+		ps.setInt(1, article_id);
+		ps.executeUpdate();
+	}
 }

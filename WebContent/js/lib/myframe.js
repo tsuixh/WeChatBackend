@@ -23,7 +23,7 @@ function ajax(method, url, data, callback) {
 	}
 	xhr.send(data);
 	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && shr.status == 200) {
+		if (xhr.readyState == 4 && xhr.status == 200) {
 			var data = xhr.responseText;
 			callback(eval("("+data+")"));
 		}

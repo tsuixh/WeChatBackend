@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tsui.entity.Article;
 import org.tsui.entity.Keyword;
 import org.tsui.entity.PageAttr;
 import org.tsui.util.DaoHelper;
@@ -74,7 +75,60 @@ public class DataRequestHandler extends HttpServlet {
 			
 		} else if ("article".equals(type)) {
 			//TODO:查询文章分页
+			int currentPage = Integer.parseInt(request.getParameter("page"));
 			
+			//配置分页查询属性
+			PageAttr pa = new PageAttr();
+			pa.setColumns(" article_id,title,pic_url");
+			pa.setTableName("article");
+			pa.setPageSize(15);
+			pa.setCurrentPage(currentPage);
+			
+			try {
+				PageAttr pageAttr = DaoHelper.findByPage(pa, new CallBack() {
+					
+					@Override
+					public List<Article> getData(ResultSet rs) throws SQLException {
+						List<Article> tempList = new ArrayList<>();
+						while (rs.next()) {
+							int article_id = rs.getInt("article_id");
+							String title = rs.getString("title");
+							String pic_url = rs.getString("pic_url");
+							Article article = new Article();
+							article.setArticle_id(article_id);
+							article.setTitle(title);
+							article.setPicUrl(pic_url);
+							tempList.add(article);
+						}
+						return tempList;
+					}
+				});
+				
+				Gson gson = new Gson();
+				String responseText = gson.toJson(pageAttr);
+				PrintWriter pw = response.getWriter();
+				pw.write(responseText);
+				pw.flush();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		} else if ("deleteKey".equals(type)) {
+			int key_id = Integer.parseInt(request.getParameter("key_id"));
+			try {
+				DaoHelper.deleteKeywordById(key_id);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if ("choose4Sub".equals(type)) {
+			int article_id = Integer.parseInt(request.getParameter("article_id"));
+			
+			try {
+				DaoHelper.setSubArticle(article_id);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

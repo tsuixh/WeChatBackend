@@ -6,6 +6,15 @@ package org.tsui.entity;
  *
  */
 public class Article {
+	private int article_id;
+	public int getArticle_id() {
+		return article_id;
+	}
+
+	public void setArticle_id(int article_id) {
+		this.article_id = article_id;
+	}
+
 	private String Title;
 	private String Description;
 	private String PicUrl;
@@ -27,6 +36,7 @@ public class Article {
 	public Article(){
 	}
 
+	
 	public String getTitle() {
 		return Title;
 	}

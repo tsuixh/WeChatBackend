@@ -28,10 +28,9 @@ public class DatabaseUtil {
 			c3p0.setUser(USERNAME);
 			c3p0.setPassword(PASSWORD);
 			c3p0.setInitialPoolSize(POOL_SIZE);
-			c3p0.setMaxPoolSize(200);
-			c3p0.setMaxIdleTime(30);
+			c3p0.setMaxPoolSize(100);
+			c3p0.setMaxIdleTime(20);
 		} catch (PropertyVetoException e) {
-			// TODO Log the error message
 			e.printStackTrace();
 		}
 	}

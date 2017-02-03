@@ -16,7 +16,7 @@
 	<!-- Custom JavaScript Frame -->  
 	<script type="text/javascript" src="js/lib/myframe.js"></script>
 	<!-- Custom JavaScript -->
-	<script type="text/javascript" src="js/sendXhr.js"></script>
+	<script type="text/javascript" src="js/sendXhr4Sub.js"></script>
 </head>
 <body onload="javascript:goPage(1,'keyword')">
 	<div class="container">
@@ -26,12 +26,12 @@
 	    		<a class="navbar-brand" href="itech.jsp">武理解析-Wulijiexi</a>
 	    		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
 	    			<ul class="nav navbar-nav na">
-	    				<li class="active"><a href="#">关键词管理</a></li>
+	    				<li><a href="#">关键词管理</a></li>
 	    				<li><a href="addPic_reply.html">添加图文回复</a></li>
 	    				<li><a href="addText_reply.html">添加文字回复</a></li>
 	    				<li><a href="addAd.html">广告设置</a></li>
 	    				<li><a href="defaultTextReply.html">设置默认回复</a>
-	    				<li><a href="Reply4Sub.jsp">设置关注回复</a>
+	    				<li class="active"><a href="Reply4Sub.jsp">设置关注回复</a>
 	    				<li><a href="#">查看统计数据</a></li>
 	    			</ul>
 	    		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">${user }</a></p>
@@ -45,10 +45,9 @@
 		    	<table class="table table-hover">
 		    		<thead>
 		    			<tr>
-		    				<td>关键词ID</td>
-		    				<td>关键词</td>
-		    				<td>关键词回复类型</td>
-		    				<td>操作</td>
+		    				<td>图文标题</td>
+		    				<td>封面图片</td>
+		    				<td>选择</td>
 		    			</tr>
 		    		</thead>
 					<tbody id="tbody"></tbody>
