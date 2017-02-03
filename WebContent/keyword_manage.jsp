@@ -18,7 +18,7 @@
 	<!-- Custom JavaScript -->
 	<script type="text/javascript" src="js/sendXhr.js"></script>
 </head>
-<body>
+<body onload="javascript:goPage(1)">
 	<div class="container">
 		<!--  导航栏 -->
 	    <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,25 +39,20 @@
 	    	</div>
 	    </nav>
     	<!-- 内容展示：表格展示当前所有关键词（分页） -->
-    	
+    	<table class="table table-hover">
+    		<thead>
+    			<tr>
+    				<td>关键词ID</td>
+    				<td>关键词</td>
+    				<td>关键词回复类型</td>
+    				<td>操作</td>
+    			</tr>
+    		</thead>
+			<tbody id="tbody"></tbody>
+		</table>
 	    <!-- 分页 -->
-	    <nav aria-label="Page navigation">
-		  <ul class="pagination">
-		    <li class="disabled">
-		      <a href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li>
-		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
+	    <nav aria-label="...">
+		  <ul class="pager" id="pageBar">
 		  </ul>
 		</nav>
 	</div>

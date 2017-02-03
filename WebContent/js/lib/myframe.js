@@ -12,7 +12,7 @@
 function ajax(method, url, data, callback) {
 	
 	var xhr;
-	if (window.XMLHttpRequest()) {
+	if (window.XMLHttpRequest) {
 		xhr = new XMLHttpRequest();
 	} else {
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -25,7 +25,7 @@ function ajax(method, url, data, callback) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && shr.status == 200) {
 			var data = xhr.responseText;
-			callback(data);
+			callback(eval("("+data+")"));
 		}
 	}
 }
