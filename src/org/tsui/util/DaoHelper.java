@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.tsui.entity.Article;
 import org.tsui.entity.Keyword;
+import org.tsui.entity.PageAttr;
 
 
 /**
@@ -310,5 +312,106 @@ public class DaoHelper {
 		return effectedRow > 0? true : false;
 	}
 	
+	/**
+	 * 分页查询
+	 * @param pa	分页属性
+	 * @return		包含查询数据结果的data集合的pageAttr对象
+	 * @throws SQLException 
+	 */
+	public static PageAttr findByPage (PageAttr pa, CallBack func) throws SQLException {
+		
+		//获取表中的总记录数
+		int columnCount = getColumnCount(pa.getTableName());
+		pa.setTotalLine(columnCount);
+		//计算并设置总页数
+		if (pa.getTotalLine() % pa.getPageSize() == 0) {
+			pa.setTotalPage(pa.getTotalLine() / pa.getPageSize());
+		} else {
+			pa.setTotalPage((pa.getTotalLine() / pa.getPageSize()) + 1);
+		}
+		
+		String finalSql = "";
+		finalSql = generateSQL(pa);
+		//通过sql执行custom查询返回数据
+		List data = func.getData(excuteSQL(finalSql));
+		
+		pa.setData(data);
+		
+		return pa;
+	}
+
+	/**
+	 * 获取表中的总记录数
+	 * @param tableName	表名称
+	 * @return	记录数
+	 * @throws SQLException 
+	 */
+	private static int getColumnCount(String tableName) throws SQLException {
+		int columnCount = 0;
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		Statement s = conn.createStatement();
+		ResultSet rs = s.executeQuery("select count(*) from " + tableName);
+		if (rs.next()) {
+			columnCount = rs.getInt(1);
+		}
+		return columnCount;
+	}
 	
+	/**
+	 * 通过属性生成sql查询语句
+	 * @param pa 分页条件对象
+	 * @return	sql语句
+	 */
+	private static String generateSQL(PageAttr pa) {
+		//防止无限上页和下页
+		if (pa.getCurrentPage() < 1) {
+			pa.setCurrentPage(1);
+		}
+		if (pa.getCurrentPage() > pa.getTotalPage()) {
+			pa.setCurrentPage(pa.getTotalPage());
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT ").append(pa.getColumns()).append(" FROM ").append(pa.getTableName());
+		//判断是否有查询条件
+		if (pa.getCondition() != null && "".equals(pa.getCondition())) {
+			sb.append(" WHERE ").append(pa.getCondition());
+		}
+		//默认升序排序，这里不做处理
+		//添加分页条件
+		sb.append(" LIMIT ").append(String.valueOf(pa.getCurrentPage())).append(",").append(String.valueOf(pa.getPageSize()));
+		String finalSql = sb.toString();
+		return finalSql;
+	}
+	
+	/**
+	 * 执行分页查询语句返回ResultSet
+	 * @param finalSql SQL语句
+	 * @return	ResultSet
+	 * @throws SQLException 
+	 */
+	private static ResultSet excuteSQL(String finalSql) throws SQLException {
+		if (conn == null) {
+			conn = DatabaseUtil.getConn();
+		}
+		PreparedStatement ps = conn.prepareStatement(finalSql);
+		ResultSet rs = ps.executeQuery();
+		return rs;
+	}
+	
+	/**
+	 * @author TsuiXh
+	 *	通过回掉来执行数据的查询
+	 */
+	public interface CallBack {
+		/**
+		 * 通过结果集来获取数据，类型转换之类的
+		 * @param rs	结果集ResultSet
+		 * @return	数据集合
+		 * @throws SQLException 
+		 */
+		public List getData(ResultSet rs) throws SQLException;
+	}
 }

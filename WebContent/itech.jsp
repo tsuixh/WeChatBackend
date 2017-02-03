@@ -27,6 +27,7 @@
     				<li><a href="addText_reply.html">添加文字回复</a></li>
     				<li><a href="addAd.html">广告设置</a></li>
     				<li><a href="defaultTextReply.html">设置默认回复</a>
+    				<li><a href="#">设置关注回复</a>
     				<li><a href="#">查看统计数据</a></li>
     			</ul>
     		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">${user }</a></p>

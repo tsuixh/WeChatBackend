@@ -11,6 +11,17 @@ public class Keyword {
 	private String reply_type = "";
 	private int article_id;
 	private int text_id;
+	
+	public Keyword(){
+	}
+
+	public Keyword(int key_id, String keyword, String reply_type) {
+		super();
+		this.key_id = key_id;
+		this.keyword = keyword;
+		this.reply_type = reply_type;
+	}
+
 	public int getKey_id() {
 		return key_id;
 	}
