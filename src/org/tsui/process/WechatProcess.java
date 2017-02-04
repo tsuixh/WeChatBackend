@@ -10,13 +10,13 @@ public class WechatProcess {
 	public String processWechatMsg(String xml) {
 		
 		//解析xml数据
-		//TODO:创建ReceiveXmlEntity类以及ReceiveXmlProcess类
+		//创建ReceiveXmlEntity类以及ReceiveXmlProcess类
 		ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);
 		
 		/*
 		 * 根据发送来的消息，获取需要回复的内容
 		 * 调用自动回复机器人接口
-		 * TODO：创建自动回复机器人类RobotProcess
+		 * 创建自动回复机器人类RobotProcess
 		 */
 		String result = "";
 		

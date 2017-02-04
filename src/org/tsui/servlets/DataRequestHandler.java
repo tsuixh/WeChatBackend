@@ -74,7 +74,7 @@ public class DataRequestHandler extends HttpServlet {
 			}
 			
 		} else if ("article".equals(type)) {
-			//TODO:查询文章分页
+			//查询文章分页
 			int currentPage = Integer.parseInt(request.getParameter("page"));
 			
 			//配置分页查询属性
