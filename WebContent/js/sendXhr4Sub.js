@@ -20,8 +20,8 @@ function choose4Sub(article_id) {
  * @param requestType
  * @returns
  */
-function goPage(currentPage, requestType) {
-	ajax('get','RequestHandler?type='+requestType+'&page='+currentPage, null, function(pageAttr) {
+function goPage(currentPage) {
+	ajax('get','RequestHandler?type=article&page='+currentPage, null, function(pageAttr) {
 		var content = "";
 		for (var i = 0; i < pageAttr.data.length; i ++) {
 			var article = pageAttr.data[i];
@@ -35,10 +35,10 @@ function goPage(currentPage, requestType) {
 		tbody.innerHTML = content;
 		//显示工具条
 		var pageNav = document.getElementById('pageBar');
-		pageNav.innerHTML = "<li><a href='javascript:goPage(1, 'article')'>首页</a></li>" + 
-												"<li><a href='javascript:goPage("+(pageAttr.currentPage - 1)+", 'article' )'>上一页</a></li>" +
+		pageNav.innerHTML = "<li><a href='javascript:goPage(1)'>首页</a></li>" + 
+												"<li><a href='javascript:goPage("+(pageAttr.currentPage - 1)+")'>上一页</a></li>" +
 												pageAttr.currentPage + " / " + pageAttr.totalPage + 
-												"<li><a href='javascript:goPage("+(pageAttr.currentPage + 1)+", 'article')'>下一页</a></li>" + 
-												"<li><a href='javascript:goPage("+pageAttr.totalPage+", 'article')'>尾页</a></li>";
+												"<li><a href='javascript:goPage("+(pageAttr.currentPage + 1)+")'>下一页</a></li>" + 
+												"<li><a href='javascript:goPage("+pageAttr.totalPage+")'>尾页</a></li>";
 	});
 }
