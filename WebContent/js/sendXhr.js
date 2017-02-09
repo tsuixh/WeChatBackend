@@ -10,7 +10,7 @@
  */
 function deleteKey(key_id, currentPage) {
 	ajax('get','RequestHandler?type=deleteKey&key_id='+key_id, null, function() {
-		goPage(currentPage, keyword);
+		goPage(currentPage, 'keyword');
 	});
 }
 
