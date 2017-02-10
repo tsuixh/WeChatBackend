@@ -60,6 +60,9 @@ public class FormatXmlProcess {
 			sb.append(articles.get(i).getPicUrl());
 			sb.append("]]></PicUrl><Url><![CDATA[");
 			sb.append(articles.get(i).getUrl());
+			//添加用户的openId
+			sb.append("&openId=");
+			sb.append(to);
 			sb.append("]]></Url></item>");
 		}
 		sb.append("</Articles></xml>");
