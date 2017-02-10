@@ -43,6 +43,9 @@ public class WechatServlet extends HttpServlet {
 		//从微信服务器接收到的xml数据
 		String xml = stringBuffer.toString();
 		
+		//debug
+		System.err.println("接收到微信服务器的消息" + xml);
+		
 		String result = "";
 		/**
 		 * 判断是否是为微信接入激活验证，只有首次验证时才会受到echostr参数，此时需要把它直接返回
@@ -54,6 +57,9 @@ public class WechatServlet extends HttpServlet {
 			//处理微信自动回复等逻辑
 			//WechatProcess类以及自动回复逻辑
 			result = new WechatProcess().processWechatMsg(xml);
+			
+			//debug
+			System.err.println("发送的回复消息" + result);
 		}
 		
 		/*

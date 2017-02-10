@@ -61,6 +61,8 @@ public class RobotProcess {
 				e.printStackTrace();
 			}
 		}
+		//debug
+		System.out.println(articles.size());
 		//FormatXml
 		if (articles.size() > 0) {
 			result = new FormatXmlProcess().formatArticleAnswer(to, from, articles);
@@ -92,7 +94,9 @@ public class RobotProcess {
 			//组装图文
 			ArrayList<Article> articles = new ArrayList<>();
 			articles.add(article);
-			articles.add(advertisement);
+			if (advertisement != null) {
+				articles.add(advertisement);
+			}
 			//封装xml信息
 			result = new FormatXmlProcess().formatArticleAnswer(to, from, articles);
 		} else if ("text".equals(reply_type)) {

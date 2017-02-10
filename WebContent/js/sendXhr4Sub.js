@@ -25,9 +25,10 @@ function goPage(currentPage) {
 		var content = "";
 		for (var i = 0; i < pageAttr.data.length; i ++) {
 			var article = pageAttr.data[i];
+			console.info(article);
 			content += "<tr>" + 
-										"<td>" +article.title + "</td>" +
-										"<td><img src='"+article.pic_url+"'></td>";
+										"<td>" +article.Title + "</td>" +
+										"<td><img src='"+article.PicUrl+"'></td>";
 			
 			content += "<td><a href='javascript:choose4Sub("+article.article_id+")'><img src='img/button-add.png'></a></td></tr>";
 		}

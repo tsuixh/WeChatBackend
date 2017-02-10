@@ -3,6 +3,7 @@ package org.tsui.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -62,10 +63,10 @@ public class DaoHelper {
 		if (conn == null) {
 			conn = DatabaseUtil.getConn();
 		}
-		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,ad_url FROM article WHERE article_id = ?");
+		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE article_id = ?");
 		ps.setInt(1, article_id);
 		ResultSet rs = ps.executeQuery();
-		if (rs != null) {
+		if (rs.next()) {
 			String title = rs.getString("title");
 			String description = rs.getString("description");
 			String pic_url = rs.getString("pic_url");
@@ -87,13 +88,14 @@ public class DaoHelper {
 		}
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM ad order by ad_id desc limit 1");
-		
-		String title = rs.getString("title");
-		String description = rs.getString("description");
-		String pic_url = rs.getString("pic_url");
-		String ad_url = rs.getString("ad_url");
-		//广告
-		article = new Article(title, description, pic_url, ad_url);
+		if (rs.next()) {
+			String title = rs.getString("title");
+			String description = rs.getString("description");
+			String pic_url = rs.getString("pic_url");
+			String ad_url = rs.getString("ad_url");
+			//广告
+			article = new Article(title, description, pic_url, ad_url);
+		}
 		
 		return article;
 	}
@@ -111,7 +113,9 @@ public class DaoHelper {
 		}
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT content FROM text_reply WHERE text_id = " + String.valueOf(id));
-		reply_text = rs.getString("content");
+		if (rs.next()) {
+			reply_text = rs.getString("content");
+		}
 		return reply_text;
 	}
 
@@ -125,17 +129,21 @@ public class DaoHelper {
 		if (conn == null) {
 			conn = DatabaseUtil.getConn();
 		}
-		Statement s = conn.createStatement();
-		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM article WHERE is4_sub = 1");
-		if (rs != null) {
-			while (rs.next()) {
-				String title = rs.getString("title");
-				String description = rs.getString("description");
-				String pic_url = rs.getString("pic_url");
-				String url = rs.getString("url");
-				Article article = new Article(title, description, pic_url, url);
-				articles.add(article);
-			}
+		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE is4_sub = 1");
+		ResultSet rs = ps.executeQuery();
+		//debug
+		ResultSetMetaData rsmd = rs.getMetaData();
+		int columnCount = rsmd.getColumnCount();
+		System.out.println(columnCount);
+		while (rs.next()) {
+			String title = rs.getString("title");
+			String description = rs.getString("description");
+			String pic_url = rs.getString("pic_url");
+			String url = rs.getString("url");
+			Article article = new Article(title, description, pic_url, url);
+			//debug
+			System.out.println(article);
+			articles.add(article);
 		}
 		return articles;
 	}
