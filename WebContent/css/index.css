@@ -1,11 +1,5 @@
 body {
 	background: url("../img/bg.jpg") fixed;
+	padding-top:70px;
 }
 
-.jumbotron {
-	margin-top:10px;
-}
-
-#scroll_play {
-	margin-top:40px;	
-}

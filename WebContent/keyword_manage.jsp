@@ -18,7 +18,7 @@
 	<!-- Custom JavaScript -->
 	<script type="text/javascript" src="js/sendXhr.js"></script>
 </head>
-<body onload="javascript:goPage(0)">
+<body onload="javascript:goPage(0)"  style="padding-top: 70px">
 	<div class="container">
 		<!--  导航栏 -->
 	    <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +39,6 @@
 	    	</div>
 	    </nav>
 	    
-	    <div class="container" style="margin-top: 50px">
 	    	<div class="well">
 		    	<!-- 内容展示：表格展示当前所有关键词（分页） -->
 		    	<table class="table table-hover">
@@ -59,7 +58,9 @@
 				  </ul>
 				</nav>
 			</div>
-		</div>
+		 <!--版权信息-->
+	    <hr>
+	    <div class="text-info">&copy;武理解析Wulijiexi. Powered by Yunhong. 2017</div>
 	</div>
 </body>
 </html>
