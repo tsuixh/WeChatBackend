@@ -36,9 +36,9 @@ function goPage(currentPage) {
 		tbody.innerHTML = content;
 		//显示工具条
 		var pageNav = document.getElementById('pageBar');
-		pageNav.innerHTML = "<li><a href='javascript:goPage(1)'>首页</a></li>" + 
+		pageNav.innerHTML = "<li><a href='javascript:goPage(0)'>首页</a></li>" + 
 												"<li><a href='javascript:goPage("+(pageAttr.currentPage - 1)+")'>上一页</a></li>" +
-												pageAttr.currentPage + " / " + pageAttr.totalPage + 
+												(pageAttr.currentPage + 1) + " / " + pageAttr.totalPage + 
 												"<li><a href='javascript:goPage("+(pageAttr.currentPage + 1)+")'>下一页</a></li>" + 
 												"<li><a href='javascript:goPage("+pageAttr.totalPage+")'>尾页</a></li>";
 	});

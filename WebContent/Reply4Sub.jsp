@@ -26,7 +26,7 @@
 	    		<a class="navbar-brand" href="itech.jsp">武理解析-Wulijiexi</a>
 	    		<div class="collapse navbar-collapse" id="bs-example-bavbar-collapse-1">
 	    			<ul class="nav navbar-nav na">
-	    				<li><a href="#">关键词管理</a></li>
+	    				<li><a href="keyword_manage.jsp">关键词管理</a></li>
 	    				<li><a href="addPic_reply.html">添加图文回复</a></li>
 	    				<li><a href="addText_reply.html">添加文字回复</a></li>
 	    				<li><a href="addAd.html">广告设置</a></li>

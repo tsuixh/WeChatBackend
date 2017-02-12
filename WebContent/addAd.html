@@ -5,8 +5,10 @@
 <title>微信公众号管理中心</title>
 <link href="css/lib/bootstrap.min.css" rel="stylesheet">
 <link href="css/addPic_reply.css" rel="stylesheet">
+<script type="text/javascript" src="js/lib/myframe.js"></script>
+<script type="text/javascript" src="js/advertise.js"></script>
 </head>
-<body>
+<body onload="javascript:queryAd()">
 	<div class="container">
 		<!--  导航栏 -->
 	    <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +19,7 @@
 	    				<li><a href="keyword_manage.jsp">关键词管理</a></li>
 	    				<li><a href="addPic_reply.html">添加图文回复</a></li>
 	    				<li><a href="addText_reply.html">添加文字回复</a></li>
-	    				<li class="active"><a href="#">广告设置</a></li>
+	    				<li class="active"><a href="addAd.html">广告设置</a></li>
 	    				<li><a href="defaultTextReply.html">设置默认回复</a>
 	    				<li><a href="Reply4Sub.jsp">设置关注回复</a>
 	    				<li><a href="#">查看统计数据</a></li>
@@ -26,13 +28,16 @@
 	    	</div>
 	    </nav>
 	    
-	    <!-- 表单部分 -->
+	    <!-- Well -->
 	    <div class="well" id="form_area">
+	    	<!-- 显示当前广告 -->
+	    	<div id="currentAd"></div>
+	    	<!-- 表单部分 -->
 	    	<form action="ConfigServlet" method="post">
 	    	  <input type="hidden" name="reply_type" value="ad">
 			  <div class="form-group">
 			    <label for="title">广告标题</label>
-			    <input type="text" class="form-control" id="title" name="title" placeholder="图文标题">
+			    <input type="text" class="form-control" id="title" name="title" placeholder="图文标题" required="required">
 			  </div>
 			  <div class="form-group">
 			    <label for="description">广告描述</label>
@@ -40,11 +45,11 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="pic_url">广告封面图片地址</label>
-			    <input type="url" class="form-control" id="pic_url" name="pic_url" placeholder="例如：http://www.baidu.com/img/hello.jpg">
+			    <input type="url" class="form-control" id="pic_url" name="pic_url" placeholder="例如：http://www.baidu.com/img/hello.jpg" required="required">
 			  </div>
 			  <div class="form-group">
 			    <label for="url">广告文章地址</label>
-			    <input type="url" class="form-control" id="url" name="url" placeholder="例如：http://www.baidu.com/article/wulijiexi.html">
+			    <input type="url" class="form-control" id="url" name="url" placeholder="例如：http://www.baidu.com/article/wulijiexi.html" required="required">
 			  </div>
 			  <button type="submit" class="btn btn-info">提交</button>
 			</form>

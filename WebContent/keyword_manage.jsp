@@ -18,7 +18,7 @@
 	<!-- Custom JavaScript -->
 	<script type="text/javascript" src="js/sendXhr.js"></script>
 </head>
-<body onload="javascript:goPage(1,'keyword')">
+<body onload="javascript:goPage(0)">
 	<div class="container">
 		<!--  导航栏 -->
 	    <nav class="navbar navbar-inverse navbar-fixed-top">

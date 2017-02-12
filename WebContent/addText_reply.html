@@ -18,7 +18,7 @@
 	    				<li><a href="addPic_reply.html">添加图文回复</a></li>
 	    				<li class="active"><a href="#">添加文字回复</a></li>
 	    				<li><a href="addAd.html">广告设置</a></li>
-	    				<li><a href="defaultTextReply">设置默认回复</a>
+	    				<li><a href="defaultTextReply.html">设置默认回复</a>
 	    				<li><a href="Reply4Sub.jsp">设置关注回复</a>
 	    				<li><a href="#">查看统计数据</a></li>
 	    			</ul>
@@ -32,11 +32,11 @@
 	    	  <input type="hidden" name="reply_type" value="text">
 			  <div class="form-group">
 			    <label for="content">文字内容</label>
-			    <input type="text" class="form-control" id="content" name="content" placeholder="文字回复内容">
+			    <input type="text" class="form-control" id="content" name="content" placeholder="文字回复内容" required="required">
 			  </div>
 			  <div class="form-group">
 			    <label for="keyword">关键词</label>
-			    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="请填写关键词，关键词语关键词之间用逗号分隔，切记是中文符号">
+			    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="请填写关键词，关键词语关键词之间用逗号分隔，切记是中文符号" required="required">
 			  </div>
 			  <button type="submit" class="btn btn-info">提交</button>
 			</form>

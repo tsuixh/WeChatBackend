@@ -23,6 +23,7 @@ public class PageAttr {
 	private int currentPage;//当前页	（必须）
 	private int pageSize;//页面大小	（必须）
 	
+	@SuppressWarnings("rawtypes")
 	private List data;//获取的数据
 	private int totalLine;//总记录数
 	private int totalPage;//总页数
@@ -93,9 +94,11 @@ public class PageAttr {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+	@SuppressWarnings("rawtypes")
 	public List getData() {
 		return data;
 	}
+	@SuppressWarnings("rawtypes")
 	public void setData(List data) {
 		this.data = data;
 	}

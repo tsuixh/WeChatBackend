@@ -53,24 +53,31 @@ public class RobotProcess {
 	 */
 	public String processEvent(String event, String to, String from) {
 		String result = "";
-		ArrayList<Article> articles = new ArrayList<>();
-		if ("subscrible".endsWith(event)) {
+		ArrayList<Article> articles = null;
+		if ("subscribe".endsWith(event)) {
 			try {
 				articles = DaoHelper.queryArticles4Subscrible();
+				//debug
+				System.out.println("查询出的文章数：" + articles.size());
+				//FormatXml
+				if (articles.size() > 0) {
+					result = new FormatXmlProcess().formatArticleAnswer(to, from, articles);
+					//debug
+					System.out.println("准备发送的消息："+ result);
+				} else {
+					//如果数据库中没有设置图文回复，则回复默认文字消息
+					String content = "欢迎来到武理解析，回复科目查看更多信息";
+					result = new FormatXmlProcess().formatTextAnswer(to, from, content);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else if ("unsubscribe".equals(event)) {
+			//TODO：日后统计数据
+			System.out.println("一位用户取消了关注");
 		}
-		//debug
-		System.out.println(articles.size());
-		//FormatXml
-		if (articles.size() > 0) {
-			result = new FormatXmlProcess().formatArticleAnswer(to, from, articles);
-		} else {
-			//如果数据库中没有设置图文回复，则回复默认文字消息
-			String content = "欢迎来到武理解析，回复科目查看更多信息";
-			result = new FormatXmlProcess().formatTextAnswer(to, from, content);
-		}
+		
+		
 		return result;
 	}
 	

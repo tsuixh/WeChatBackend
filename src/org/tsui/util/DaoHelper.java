@@ -129,12 +129,16 @@ public class DaoHelper {
 		if (conn == null) {
 			conn = DatabaseUtil.getConn();
 		}
-		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE is4_sub = 1");
+		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE is4_sub = ?");
+		ps.setBoolean(1, true);
 		ResultSet rs = ps.executeQuery();
 		//debug
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int columnCount = rsmd.getColumnCount();
 		System.out.println(columnCount);
+		boolean flag = rs.wasNull();
+		System.out.println("ResultSet是否为空：" + flag);
+		
 		while (rs.next()) {
 			String title = rs.getString("title");
 			String description = rs.getString("description");
@@ -326,6 +330,7 @@ public class DaoHelper {
 	 * @return		包含查询数据结果的data集合的pageAttr对象
 	 * @throws SQLException 
 	 */
+	@SuppressWarnings("rawtypes")
 	public static PageAttr findByPage (PageAttr pa, CallBack func) throws SQLException {
 		
 		//获取表中的总记录数
@@ -374,11 +379,11 @@ public class DaoHelper {
 	 */
 	private static String generateSQL(PageAttr pa) {
 		//防止无限上页和下页
-		if (pa.getCurrentPage() < 1) {
-			pa.setCurrentPage(1);
+		if (pa.getCurrentPage() < 0) {
+			pa.setCurrentPage(0);
 		}
-		if (pa.getCurrentPage() > pa.getTotalPage()) {
-			pa.setCurrentPage(pa.getTotalPage());
+		if (pa.getCurrentPage() > (pa.getTotalPage() - 1)) {
+			pa.setCurrentPage(pa.getTotalPage() - 1);
 		}
 		
 		StringBuffer sb = new StringBuffer();
@@ -389,7 +394,7 @@ public class DaoHelper {
 		}
 		//默认升序排序，这里不做处理
 		//添加分页条件
-		sb.append(" LIMIT ").append(String.valueOf(pa.getCurrentPage())).append(",").append(String.valueOf(pa.getPageSize()));
+		sb.append(" LIMIT ").append(String.valueOf((pa.getCurrentPage()*pa.getPageSize()))).append(",").append(String.valueOf(pa.getPageSize()));
 		String finalSql = sb.toString();
 		return finalSql;
 	}
@@ -420,21 +425,24 @@ public class DaoHelper {
 		 * @return	数据集合
 		 * @throws SQLException 
 		 */
+		@SuppressWarnings("rawtypes")
 		public List getData(ResultSet rs) throws SQLException;
 	}
 
 	/**
 	 * 通过id删除关键词
 	 * @param key_id
+	 * @return true if success
 	 * @throws SQLException
 	 */
-	public static void deleteKeywordById(int key_id) throws SQLException {
+	public static boolean deleteKeywordById(int key_id) throws SQLException {
 		if (conn == null) {
 			conn = DatabaseUtil.getConn();
 		}
 		PreparedStatement ps = conn.prepareStatement("delete from keyword where key_id=?");
 		ps.setInt(1, key_id);
-		ps.executeUpdate();
+		int effectedRows = ps.executeUpdate();
+		return effectedRows > 0? true : false;
 	}
 
 	/**
@@ -442,12 +450,13 @@ public class DaoHelper {
 	 * @param article_id
 	 * @throws SQLException 
 	 */
-	public static void setSubArticle(int article_id) throws SQLException {
+	public static boolean setSubArticle(int article_id) throws SQLException {
 		if (conn == null) {
 			conn = DatabaseUtil.getConn();
 		}
 		PreparedStatement ps = conn.prepareStatement("update article set is4_sub = 1 where article_id = ?");
 		ps.setInt(1, article_id);
-		ps.executeUpdate();
+		int effectedRow = ps.executeUpdate();
+		return effectedRow > 0? true: false;
 	}
 }

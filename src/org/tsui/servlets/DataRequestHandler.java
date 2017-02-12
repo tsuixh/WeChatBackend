@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.tsui.entity.Article;
 import org.tsui.entity.Keyword;
 import org.tsui.entity.PageAttr;
+import org.tsui.entity.StateReporter;
 import org.tsui.util.DaoHelper;
 import org.tsui.util.DaoHelper.CallBack;
 
@@ -121,7 +122,22 @@ public class DataRequestHandler extends HttpServlet {
 		} else if ("deleteKey".equals(type)) {
 			int key_id = Integer.parseInt(request.getParameter("key_id"));
 			try {
-				DaoHelper.deleteKeywordById(key_id);
+				boolean isSuccess = DaoHelper.deleteKeywordById(key_id);
+				if (isSuccess) {
+					//返回数据
+					Gson gson = new Gson();
+					String responseText = gson.toJson(new StateReporter("success"));
+					PrintWriter pw = response.getWriter();
+					pw.write(responseText);
+					pw.flush();
+				} else {
+					//返回数据
+					Gson gson = new Gson();
+					String responseText = gson.toJson(new StateReporter("failed"));
+					PrintWriter pw = response.getWriter();
+					pw.write(responseText);
+					pw.flush();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -129,7 +145,22 @@ public class DataRequestHandler extends HttpServlet {
 			int article_id = Integer.parseInt(request.getParameter("article_id"));
 			
 			try {
-				DaoHelper.setSubArticle(article_id);
+				boolean isSuccess = DaoHelper.setSubArticle(article_id);
+				if (isSuccess) {
+					//返回数据
+					Gson gson = new Gson();
+					String responseText = gson.toJson(new StateReporter("success"));
+					PrintWriter pw = response.getWriter();
+					pw.write(responseText);
+					pw.flush();
+				} else {
+					//返回数据
+					Gson gson = new Gson();
+					String responseText = gson.toJson(new StateReporter("failed"));
+					PrintWriter pw = response.getWriter();
+					pw.write(responseText);
+					pw.flush();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
