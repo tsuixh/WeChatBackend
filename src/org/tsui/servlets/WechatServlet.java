@@ -59,7 +59,7 @@ public class WechatServlet extends HttpServlet {
 			result = new WechatProcess().processWechatMsg(xml);
 			
 			//debug
-			System.err.println("发送的回复消息" + result);
+			//System.err.println("发送的回复消息" + result);
 		}
 		
 		/*

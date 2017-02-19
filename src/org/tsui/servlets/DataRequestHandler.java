@@ -68,7 +68,7 @@ public class DataRequestHandler extends HttpServlet {
 				String responseText = gson.toJson(pageAttr);
 				
 				//debug
-				System.out.println(responseText);
+				//System.out.println(responseText);
 				
 				PrintWriter pw = response.getWriter();
 				pw.write(responseText);
