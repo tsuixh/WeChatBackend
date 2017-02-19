@@ -25,8 +25,9 @@ public class DatabaseUtil {
 	private static final int MAX_IDLE_TIME = 60;
 	private static final int ACQUIRE_INCREMENT = 3;
 	private static final int ACQUIRE_RETRY_ATTEMPS = 15;
-	private static final int CHECKOUT_TIMEOUT = 100;
+	private static final int CHECKOUT_TIMEOUT = 2000;
 	private static final int IDLE_CONNECTION_TEST_PERIOD = 60;
+	private static final int MAX_STATEMENTS = 0;
 	private static Connection conn = null;
 	private static ComboPooledDataSource c3p0 = null;
 	static {
@@ -55,6 +56,8 @@ public class DatabaseUtil {
 			c3p0.setCheckoutTimeout(CHECKOUT_TIMEOUT);
 			//每个TEST_PERIOD检查所有连接池中的空闲连接
 			c3p0.setIdleConnectionTestPeriod(IDLE_CONNECTION_TEST_PERIOD);
+			//不设置缓存
+			c3p0.setMaxStatements(MAX_STATEMENTS);
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
