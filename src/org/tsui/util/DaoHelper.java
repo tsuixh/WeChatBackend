@@ -20,7 +20,6 @@ import org.tsui.entity.PageAttr;
  */
 public class DaoHelper {
 	
-	private static Connection conn;
 	/**
 	 * 通过关键词查询出回复类型以及回复信息的具体信息
 	 * @param key		关键词
@@ -29,9 +28,7 @@ public class DaoHelper {
 	 */
 	public static Keyword queryByKeyword(String key) throws SQLException {
 		Keyword keyword = null;
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT reply_type,article_id,text_id FROM KEYWORD WHERE KEYWORD = ?");
 		ps.setString(1, key);
 		ResultSet rs = ps.executeQuery();
@@ -60,9 +57,7 @@ public class DaoHelper {
 	 */
 	public static Article queryArticleById(int article_id) throws SQLException {
 		Article article = null;
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE article_id = ?");
 		ps.setInt(1, article_id);
 		ResultSet rs = ps.executeQuery();
@@ -83,9 +78,7 @@ public class DaoHelper {
 	 */
 	public static Article queryCurrentAdvertisement() throws SQLException {
 		Article article = null;
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT title,description,pic_url,ad_url FROM ad order by ad_id desc limit 1");
 		if (rs.next()) {
@@ -108,9 +101,7 @@ public class DaoHelper {
 	 */
 	public static String queryTextReplyById(int id) throws SQLException {
 		String reply_text = "";
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("SELECT content FROM text_reply WHERE text_id = " + String.valueOf(id));
 		if (rs.next()) {
@@ -126,9 +117,7 @@ public class DaoHelper {
 	 */
 	public static ArrayList<Article> queryArticles4Subscrible() throws SQLException {
 		ArrayList<Article> articles = new ArrayList<>();
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT title,description,pic_url,url FROM article WHERE is4_sub = ?");
 		ps.setBoolean(1, true);
 		ResultSet rs = ps.executeQuery();
@@ -161,9 +150,7 @@ public class DaoHelper {
 	 */
 	public static int qureyAdminister(String account, String password) throws SQLException {
 		int stateCode = 0;
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("SELECT id FROM admin WHERE account = ? AND password = ?");
 		ps.setString(1, account);
 		ps.setString(2, password);
@@ -185,9 +172,7 @@ public class DaoHelper {
 	public static int addArticle(Article article) throws SQLException {
 		int auto_incrementID = 0;
 		//获取连接
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("insert into article (title,description,pic_url,url,is4_sub) values (?,?,?,?,?)");
 		ps.setString(1, article.getTitle());
 		ps.setString(2, article.getDescription());
@@ -218,9 +203,7 @@ public class DaoHelper {
 	public static boolean addKeywords(int id, String[] tempKeywords, String replyType) throws SQLException {
 		boolean isSuccess = false;
 		//获取连接
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = null;
 		int effectedRows = 0;
 		//根据回复类型的不同做不同处理
@@ -259,9 +242,7 @@ public class DaoHelper {
 	 */
 	public static boolean addAdvertisement(Article advertisement) throws SQLException {
 		
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		
 		PreparedStatement ps = conn.prepareStatement("insert into ad (title,description,pic_url,ad_url) values (?,?,?,?)");
 		ps.setString(1, advertisement.getTitle());
@@ -283,9 +264,7 @@ public class DaoHelper {
 	public static int addTextReply(String content) throws SQLException {
 		int auto_incrementID = 0;
 		
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		
 		PreparedStatement ps = conn.prepareStatement("insert into text_reply (content) values (?)");
 		ps.setString(1, content);
@@ -312,9 +291,7 @@ public class DaoHelper {
 	 */
 	public static boolean updateTextReply(String content, int textID) throws SQLException {
 		
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		
 		PreparedStatement ps = conn.prepareStatement("update text_reply set content = ? where text_id = ?");
 		ps.setString(1, content);
@@ -361,9 +338,7 @@ public class DaoHelper {
 	 */
 	private static int getColumnCount(String tableName) throws SQLException {
 		int columnCount = 0;
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		Statement s = conn.createStatement();
 		ResultSet rs = s.executeQuery("select count(*) from " + tableName);
 		if (rs.next()) {
@@ -406,9 +381,7 @@ public class DaoHelper {
 	 * @throws SQLException 
 	 */
 	private static ResultSet excuteSQL(String finalSql) throws SQLException {
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement(finalSql);
 		ResultSet rs = ps.executeQuery();
 		return rs;
@@ -436,9 +409,7 @@ public class DaoHelper {
 	 * @throws SQLException
 	 */
 	public static boolean deleteKeywordById(int key_id) throws SQLException {
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("delete from keyword where key_id=?");
 		ps.setInt(1, key_id);
 		int effectedRows = ps.executeUpdate();
@@ -451,9 +422,7 @@ public class DaoHelper {
 	 * @throws SQLException 
 	 */
 	public static boolean setSubArticle(int article_id) throws SQLException {
-		if (conn == null) {
-			conn = DatabaseUtil.getConn();
-		}
+		Connection conn = DatabaseUtil.getConn();
 		PreparedStatement ps = conn.prepareStatement("update article set is4_sub = 1 where article_id = ?");
 		ps.setInt(1, article_id);
 		int effectedRow = ps.executeUpdate();
