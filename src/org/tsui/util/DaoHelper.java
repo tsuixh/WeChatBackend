@@ -210,6 +210,10 @@ public class DaoHelper {
 		if ("article".equals(replyType)) {
 			//回复类型为文章
 			ps = conn.prepareStatement("insert into keyword (keyword,reply_type,article_id) values (?,?,?)");
+			//如果字符数组为空，则直接返回false
+			if (tempKeywords == null) {
+				return false;
+			}
 			for (int i = 0; i < tempKeywords.length; ++i) {
 				ps.setString(1, tempKeywords[i]);
 				ps.setString(2, replyType);

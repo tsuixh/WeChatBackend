@@ -110,9 +110,24 @@ public class RobotProcess {
 			//获取文字回复
 			int text_id = keyword.getText_id();
 			String reply_content = DaoHelper.queryTextReplyById(text_id);
+			
+			//如果回复消息中含有换行的话，对换行字符进行处理
+			if (reply_content.contains("\\n")) {
+				reply_content = processEnter(reply_content);
+			}
+			
 			result = new FormatXmlProcess().formatTextAnswer(to, from, reply_content);
 		}
 		
 		return result;
+	}
+
+	/**
+	 * 替换字符串中的\n为换行
+	 * @param reply_content	需要处理的字符串
+	 * @return	替换后的字符串
+	 */
+	private String processEnter(String reply_content) {
+		return reply_content.replaceAll("\\\\n", "\n");
 	}
 }

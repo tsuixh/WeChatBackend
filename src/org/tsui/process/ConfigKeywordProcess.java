@@ -41,7 +41,14 @@ public class ConfigKeywordProcess {
 	 * @return	¹Ø¼ü´ÊÊý×é
 	 */
 	private String[] processKeywords(String keywords) {
-		return keywords.split("£¬");
+		if (keywords.contains(",")) {
+			return keywords.split(",");
+		} else if (keywords.contains("£¬")) {
+			return keywords.split("£¬");
+		} else if (keywords.contains(" ")) {
+			return keywords.split(" ");
+		}
+		return null;
 	}
 
 	/**

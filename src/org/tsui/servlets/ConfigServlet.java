@@ -55,9 +55,11 @@ public class ConfigServlet extends HttpServlet {
 		} else if ("default".equals(reply_type)) {
 			//设置默认回复
 			String defaultReplyText = request.getParameter("content");
+			//debug
 			System.out.println(defaultReplyText);
 			try {
 				isSuccess = new ConfigKeywordProcess().addTextReplyProcess(defaultReplyText, "default");
+				//debug
 				System.out.println("添加是否成功：" + isSuccess);
 			} catch (SQLException e) {
 				e.printStackTrace();
