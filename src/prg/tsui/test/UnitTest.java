@@ -1,10 +1,6 @@
 package prg.tsui.test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import org.tsui.entity.Article;
-import org.tsui.process.RobotProcess;
 import org.tsui.util.DaoHelper;
 
 public class UnitTest {

@@ -28,7 +28,7 @@ function goPage(currentPage) {
 			console.info(article);
 			content += "<tr>" + 
 										"<td>" +article.Title + "</td>" +
-										"<td><img src='"+article.PicUrl+"'></td>";
+										"<td><img src='"+article.PicUrl+"'  class='demoPics'></td>";
 			
 			content += "<td><a href='javascript:choose4Sub("+article.article_id+")'><img src='img/button-add.png'></a></td></tr>";
 		}

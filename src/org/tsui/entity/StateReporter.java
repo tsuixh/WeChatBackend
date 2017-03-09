@@ -6,6 +6,9 @@ package org.tsui.entity;
  */
 public class StateReporter {
 	
+	public static final String SUCCESS = "success";
+	public static final String FAILED = "failed";
+	
 	private String state;
 
 	public String getState() {

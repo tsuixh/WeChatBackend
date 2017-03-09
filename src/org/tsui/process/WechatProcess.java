@@ -13,6 +13,9 @@ public class WechatProcess {
 		//创建ReceiveXmlEntity类以及ReceiveXmlProcess类
 		ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);
 		
+		//用户行为调研
+		
+		
 		/*
 		 * 根据发送来的消息，获取需要回复的内容
 		 * 调用自动回复机器人接口

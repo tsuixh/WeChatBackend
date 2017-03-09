@@ -11,6 +11,7 @@
     <title>微信公众号管理中心</title>
     <link href="css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+    <link href="css/CustomStyle.css" rel="stylesheet">
     <script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="js/lib/carousel.js"></script>  
 	<!-- Custom JavaScript Frame -->  

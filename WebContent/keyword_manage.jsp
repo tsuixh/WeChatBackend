@@ -38,7 +38,6 @@
 	    		</div>
 	    	</div>
 	    </nav>
-	    
 	    	<div class="well">
 		    	<!-- 内容展示：表格展示当前所有关键词（分页） -->
 		    	<table class="table table-hover">

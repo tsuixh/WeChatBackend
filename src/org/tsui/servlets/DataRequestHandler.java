@@ -149,14 +149,14 @@ public class DataRequestHandler extends HttpServlet {
 				if (isSuccess) {
 					//返回数据
 					Gson gson = new Gson();
-					String responseText = gson.toJson(new StateReporter("success"));
+					String responseText = gson.toJson(new StateReporter(StateReporter.SUCCESS));
 					PrintWriter pw = response.getWriter();
 					pw.write(responseText);
 					pw.flush();
 				} else {
 					//返回数据
 					Gson gson = new Gson();
-					String responseText = gson.toJson(new StateReporter("failed"));
+					String responseText = gson.toJson(new StateReporter(StateReporter.FAILED));
 					PrintWriter pw = response.getWriter();
 					pw.write(responseText);
 					pw.flush();
